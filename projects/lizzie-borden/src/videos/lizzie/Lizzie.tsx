@@ -41,7 +41,7 @@ const Inner: React.FC<{ id: number }> = ({ id }) => {
     tone: new ToneMappingEffect({ mode: ToneMappingMode.NEUTRAL }),
     grade: new GradeEffect(GRADES.day, GRADE_STRENGTH.day),
   }), [camera, scene]);
-  useEffect(() => () => fx.ink.dispose(), [fx]);
+  useEffect(() => () => { try { if (typeof fx.ink.dispose === "function") fx.ink.dispose(); } catch { /* already torn down by the composer */ } }, [fx]);
   const post = useMemo(() => (
     <EffectComposer multisampling={on.msaa} depthBuffer>
       {on.ink ? <primitive object={fx.ink} dispose={null} /> : <></>}
