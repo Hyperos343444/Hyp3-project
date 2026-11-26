@@ -6,7 +6,7 @@ import { LIGHTS, LOOK, LightPreset } from "./lights";
 import { TONE, CHAR, untone } from "./shade";
 import { NOINK } from "./ink";
 import { Pool, Actor, Fx, stage } from "./cast";
-import { FPS, SHOTS, BEAT, camAt, ShotDef, smooth, clamp01 } from "./story";
+import { FPS, SHOTS, shotById, BEAT, camAt, ShotDef, smooth, clamp01 } from "./story";
 import { ctex } from "./paint";
 
 /** per-shot key light: az from the shot's mean view direction (+ = screen right), el; interiors light from their windows */
@@ -101,7 +101,7 @@ export class World {
   }
 
   update(id: number, f: number, cam: THREE.PerspectiveCamera, scene: THREE.Scene) {
-    const t = f / FPS, s = SHOTS[id - 1], L = LIGHTS[s.light], K = LOOK[s.light];
+    const t = f / FPS, s = shotById(id), L = LIGHTS[s.light], K = LOOK[s.light];
     for (const [k, gr] of Object.entries(this.sets)) gr.visible = k === s.set;
     // ---- camera ----
     const c = camAt(id, f);

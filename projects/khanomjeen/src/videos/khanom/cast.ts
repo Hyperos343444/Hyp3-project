@@ -5,7 +5,7 @@
 // Only numerals appear on signs and tags (no words, no captions).
 import * as THREE from "three";
 import { Pen, bodyFront, bodySide, fxBurst, fxStars, fxContact, Outfit, Expr, FrontOpts, SideOpts, INK, SKINS, mix } from "./toon";
-import { FPS, SHOTS, BEAT, V3, clamp01, smooth, easeOut, EATER } from "./story";
+import { FPS, SHOTS, shotById, BEAT, V3, clamp01, smooth, easeOut, EATER } from "./story";
 import { SET, STALL, BOWL_B, BOWL_C, POT_C, SIGN_C, LABT } from "./sets";
 import { NOINK } from "./ink";
 import { cardShade, blobMaterial, CARD_K } from "./cardshade";
@@ -453,16 +453,17 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       const glassOn = f < BEAT.wine2;
       P(3, SCI, sci, { fo: { expr: "neutral", prop: glassOn ? "reach" : null, look: 0.6, facing: 1 } });
       if (glassOn) FX({ key: "glass", cw: 200, ch: 340, draw: fxGlass, x: sci[0] + 0.5, y: 1.12, z: sci[2] + 0.05, w: 0.12, h: 0.2 });
-      const k0 = f < BEAT.wine1 ? 0.15 : f < BEAT.d90 ? 0.4 : f < BEAT.d10 - lead ? 1 : 0.25;
+      const k0 = f < BEAT.wine1 ? 0.15 : f < BEAT.d90 - lead ? 0.4 : 1;
       FX({ key: `mon|${k0}`, cw: 512, ch: 360, draw: (p) => fxMonitor(p, k0), x: LB + 2.4, y: 1.1, z: 0.125, w: 0.82, h: 0.58, orient: 0 });
       // the insert: bottle on the cart, swinging price tag, the brain readout
       FX({ key: "bottle", cw: 200, ch: 600, draw: fxBottle, x: LABT[0] - 0.05, y: LABT[1] + 0.21, z: LABT[2], w: 0.14, h: 0.42 });
       if (f >= BEAT.wine2 - 2) {
-        const is90 = f < BEAT.d10 - lead;
-        const tp = is90 ? pop(f, BEAT.d90 - lead - 6) : pop(f, BEAT.d10 - lead);
+        // the script names the price difference first ($10), then "the expensive bottle" ($90) lights the brain
+        const is90 = f >= BEAT.d90 - lead;
+        const tp = is90 ? pop(f, BEAT.d90 - lead) : pop(f, BEAT.d10 - lead);
         const sw = 0.12 * Math.sin(t * 5) * Math.exp(-(((f - (is90 ? BEAT.d90 : BEAT.d10)) / 30) ** 2));
         if (tp > 0) FX({ key: `tag|${is90}`, cw: 360, ch: 220, draw: (p) => fxTag(p, is90 ? "$90" : "$10", is90 ? "#c8962a" : "#7a8a9a", is90 ? "#5a3a10" : "#2a3440"), x: LABT[0] + 0.12, y: LABT[1] + 0.3, z: LABT[2] + 0.06, w: 0.24 * tp, h: 0.15 * tp, rot: -0.15 + sw });
-        const k = f < BEAT.d90 - lead ? 0.3 : f < BEAT.d10 - lead ? 0.3 + 0.7 * smooth(L(f, BEAT.d90 - lead, BEAT.tasty)) : 1 - 0.8 * smooth(L(f, BEAT.d10 - lead, BEAT.d10 + 12));
+        const k = f < BEAT.d90 - lead ? 0.3 : 0.3 + 0.7 * smooth(L(f, BEAT.d90 - lead, BEAT.tasty));
         const kq = Math.round(k * 12) / 12;
         FX({ key: `brain|${kq}`, cw: 400, ch: 320, draw: (p) => fxBrain(p, kq), x: LABT[0] + 0.62, y: LABT[1] + 0.55, z: LABT[2] - 0.05, w: 0.46, h: 0.37 });
         FX({ key: "glowBrain", cw: 256, ch: 256, draw: (p) => fxGlow(p, "#ffb040"), x: LABT[0] + 0.55, y: LABT[1] + 0.5, z: LABT[2] - 0.02, w: 0.6 + 0.5 * k, h: 0.6 + 0.5 * k, mode: "add", gain: 0.25 + 0.9 * k });
@@ -628,4 +629,4 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
   return out;
 };
 
-export const SHOT_LIGHT = (id: number) => SHOTS[id - 1].light;
+export const SHOT_LIGHT = (id: number) => shotById(id).light;

@@ -12,7 +12,7 @@ import { World } from "./world";
 import { InkPass, noInkFallback } from "./ink";
 import { LensBlur } from "./lensblur";
 import { GradeEffect, GRADES, GRADE_STRENGTH, gradeFor } from "./grade";
-import { TOTAL, FLASH_AT, SHOTS, layersAt, dofAt } from "./story";
+import { TOTAL, FLASH_AT, SHOTS, shotById, layersAt, dofAt } from "./story";
 
 export const SHORT_FRAMES = TOTAL;
 type PostToggles = { ink: boolean; lens: boolean; bloom: boolean; grade: boolean; msaa: number };
@@ -60,7 +60,7 @@ const Inner: React.FC<{ id: number }> = ({ id }) => {
   if (d.focus) fpt.set(...d.focus(f)); else fpt.copy(target);
   fx.lens.focus = Math.max(0.3, fpt.sub(cam.position).dot(fwd));
   fx.lens.cInf = d.cInf;
-  gradeFor(fx.grade, SHOTS[id - 1].light);
+  gradeFor(fx.grade, shotById(id).light);
   return (
     <>
       <primitive object={world.root} dispose={null} />

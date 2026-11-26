@@ -13,20 +13,18 @@ from dsp import SR, TAU, ns, tt, rng, lp, hp, bp, colored, smooth_noise, fades, 
 from instruments import vibes, glock, pluck, pad, cymbal, timpani, m2f
 from sfx_gen import clink, whoosh, babble, bubbles, bird_chirps, breeze, stroll_step, wood_crack
 
-FPS, TOTAL, VO = 30, 2190, 0.3
+FPS, TOTAL, VO = 30, 1682, 0.3
 DUR = TOTAL / FPS
 vf = lambda t: int(np.floor((t + VO) * FPS + 0.5))
 fr = lambda f: f / FPS
-B = dict(youtube=vf(2.462), p30=vf(5.077), p50=vf(6.457), flash=252, old=vf(10.091), bowl=vf(11.614), wine2=vf(17.518),
-         d90=vf(19.409), tasty=vf(21.687), d10=vf(23.419), brain=vf(27.156), mustBeTasty=vf(28.262), discount=vf(31.936),
-         fewer=vf(32.704), fullPrice=vf(33.525), years=vf(36.584), study2010=vf(37.444), better=vf(40.764), longer=vf(42.73),
-         proof=vf(44.517), joinQ=vf(46.869), good=vf(48.028), longerQ=vf(48.679), mouth=vf(50.907), head=vf(52.058),
-         recipe=vf(53.83), story=vf(55.471), simmer=vf(58.03), fish=vf(58.824), who=vf(59.54), putBowl=vf(61.12),
-         price=vf(62.901), dont=vf(65.249), yesterday=vf(66.904), because=vf(68.241), never=vf(69.952), liar=vf(70.955),
-         voiceEnd=vf(71.363), black=2176)
-SHOT = {1: (0, 256), 2: (256, 413), 3: (413, 746), 4: (746, 882), 5: (882, 1090), 6: (1090, 1128), 7: (1128, 1320),
-        8: (1320, 1500), 9: (1500, 1597), 10: (1597, 1966), 11: (1966, TOTAL)}
-MKT_DAY = [1, 2, 4, 6, 8, 9]
+# picture beats: copy of BEAT in src/videos/khanom/story.ts (frames)
+B = dict(youtube=99, p30=142, p50=202, flash=270, old=356, bowl=428, wine2=545, d10=590, d90=682, tasty=722, brain=792,
+         mustBeTasty=841, years=881, study2010=961, better=1006, longer=1020, proof=1068, joinQ=1105, good=1125,
+         longerQ=1141, recipe=1208, story=1254, simmer=1326, fish=1393, dont=1421, yesterday=1515, because=1534,
+         never=1605, liar=1631, voiceEnd=1642, black=1668)
+SHOT = {1: (0, 272), 2: (272, 483), 3: (483, 756), 4: (756, 859), 6: (859, 928), 7: (928, 1050), 8: (1050, 1155),
+        10: (1155, 1415), 11: (1415, TOTAL)}
+MKT_DAY = [1, 2, 4, 6, 8]
 N = ns(DUR)
 cues = []
 def cue(name, t, note=""):
@@ -35,7 +33,7 @@ def buf():
     return np.zeros((2, N))
 
 # ---------------------------------------------------------------- voice
-v, sr = read_wav(os.path.join(HERE, "..", "voice", "voice.wav"))
+v, sr = read_wav(os.path.join(HERE, "..", "voice", "v2", "voice.wav"))
 assert sr == SR
 voice = buf()
 place(voice, v.mean(0) if v.shape[0] > 1 else v[0], VO)
@@ -53,12 +51,12 @@ t0, k = 0.0, 0
 while t0 < fr(B["black"]) + 0.5:
     f0 = t0 * FPS
     prog = PROG_W if SHOT[10][0] - 15 <= f0 < B["dont"] - 10 else PROG_D if f0 >= B["dont"] - 10 else PROG_A
-    lab = SHOT[3][0] <= f0 < SHOT[4][0] or SHOT[5][0] <= f0 < SHOT[6][0] or SHOT[7][0] <= f0 < SHOT[8][0]
+    lab = SHOT[3][0] <= f0 < SHOT[3][1] or SHOT[7][0] <= f0 < SHOT[7][1]
     y = pad([m2f(n) for n in prog[k % 4]], cl + 0.3, vel=0.42, r=r, att=0.8, rel=1.3, warm=620 if lab else 820, detune=7)
     place(music, y, t0)
     t0 += cl; k += 1
 # a soft low pulse under the experiments (curiosity, not dread)
-for (a, b) in [SHOT[3], SHOT[5], SHOT[7]]:
+for (a, b) in [SHOT[3], SHOT[7]]:
     t = fr(a) + 0.2
     while t < fr(b) - 0.2:
         y = timpani(m2f(33), 0.22, rng(int(t * 100)), dur=0.9)
@@ -73,9 +71,9 @@ def motif(t, inst="vibes", vel=0.5, step=0.3, shift=0):
         y = vibes(f, vel * (0.85 if i % 2 else 1), rr, dur=1.6) if inst == "vibes" else pluck(f, vel, rr, dur=1.0, bright=0.6)
         place(music, widen(y, rr, 9, 0.6), t + i * step * (1 + 0.2 * (i == 5)), 0.9)
     cue("motif " + inst, t)
-for f in [6, 420, 890, 1135]:
+for f in [6, 490, 870]:
     motif(fr(f))
-for f in [1605, 1735, 1850]:
+for f in [1160, 1290]:
     motif(fr(f), "pluck", 0.6, 0.26, shift=-9)
 motif(fr(B["voiceEnd"]) - 0.4, "vibes", 0.45, 0.4)
 
@@ -141,7 +139,8 @@ t = fr(a) + 0.4
 while t < fr(b) - 0.3:
     y = bp(rng(int(t * 50)).standard_normal(ns(0.06)), 800, 2400) * np.exp(-tt(0.06) / 0.012)
     put(y, t, 0.06, int(t * 10), 0.2); t += 0.42
-popsnd(fr(B["d90"] - 6), 700, 0.45, 31, "tag $90")
+popsnd(fr(B["d10"] - 2), 420, 0.45, 34, "tag $10")
+popsnd(fr(B["d90"] - 2), 700, 0.45, 31, "tag $90")
 def swell(t, up=True, d=1.4, vel=0.4, seed=1, name="swell"):
     tb = tt(d)
     f = (220 + 440 * (tb / d)) if up else (660 - 440 * (tb / d))
@@ -149,22 +148,9 @@ def swell(t, up=True, d=1.4, vel=0.4, seed=1, name="swell"):
     put(y, t, vel, seed, 0.6, name)
 swell(fr(B["d90"]), True, 1.6, 0.25, 32, "brain swell up")
 chime(fr(B["tasty"] - 1), [84, 88, 91], 0.3, 0.06, 33, "tasty chime")
-popsnd(fr(B["d10"] - 2), 420, 0.45, 34, "tag $10")
-swell(fr(B["d10"]), False, 1.2, 0.2, 35, "brain swell down")
 # shot 4: brain lights before the bite
 swell(fr(B["brain"] - 3), True, 1.0, 0.22, 40, "brain on")
 chime(fr(B["mustBeTasty"] - 1), [79, 84, 88, 91], 0.3, 0.05, 41, "must be tasty")
-# shot 5: pencils, discount tag, a dazed wobble, a bulb ding
-rr = rng(50)
-t = fr(SHOT[5][0]) + 0.3
-while t < fr(SHOT[5][1]) - 0.3:
-    y = bp(rr.standard_normal(ns(0.12)), 2500, 7000) * np.sin(np.pi * tt(0.12) / 0.12) ** 2
-    put(y, t, 0.07, int(t * 10), 0.5); t += rr.uniform(0.2, 0.6)
-cue("pencils", fr(SHOT[5][0]))
-popsnd(fr(B["discount"] - 2), 560, 0.45, 51, "discount tag")
-tb = tt(0.8); y = np.sin(phase(520 - 260 * tb / 0.8 + 40 * np.sin(TAU * 9 * tb))) * np.exp(-tb / 0.35)
-put(y, fr(B["fewer"] - 2), 0.22, 52, 0.4, "dazed wobble")
-chime(fr(B["fullPrice"] - 2), [88, 95], 0.4, 0.05, 53, "bulb ding")
 # shot 6: shimmer on the old sign again
 chime(fr(B["years"] - 1), [76, 81, 83, 88, 93], 0.28, 0.045, 60, "sign shimmer")
 # shot 7: hourglass sand, wrapper crinkle, chime
@@ -185,21 +171,15 @@ for k2, j in enumerate([B["proof"] - 6, B["joinQ"] - 10, B["joinQ"] + 8, B["good
     while t < fr(j):
         put(stroll_step(rr, 0.4), t, 0.10, int(t * 100), 0.6); t += 1 / 1.6 / 2
 cue("footsteps join", fr(B["proof"] - 51))
-# shot 9: spoon clink + sparkle; the head lights up
-put(clink(rng(90), f0=3600, dur=0.2, bright=0.8), fr(B["mouth"] - 18), 0.3, 90, 0.3, "spoon")
-chime(fr(B["mouth"] - 1), [84, 88, 91, 96], 0.28, 0.04, 91, "mouth sparkle")
-swell(fr(B["head"] - 3), True, 1.0, 0.25, 92, "head on")
 # shot 10: phone pop, the sign rises (whoosh), pot simmering, clock ticking fast, fish, bowl, price
 popsnd(fr(B["recipe"] - 2), 520, 0.4, 100, "phone pop")
 wsh(fr(B["story"]), 0.6, 0.35, 300, 2000, 101, "sign up")
 a = B["simmer"] - 4
-put(bubbles(fr(B["who"] - a) + 0.3, rng(102), 14, 200, 900, (0.01, 0.04)) * 0.6, fr(a), 0.25, 102, 0.6, "pot simmer")
-for i in range(int((fr(B["who"]) - fr(B["simmer"])) / 0.09)):
+put(bubbles(fr(SHOT[10][1] - a) + 0.3, rng(102), 14, 200, 900, (0.01, 0.04)) * 0.6, fr(a), 0.25, 102, 0.6, "pot simmer")
+for i in range(int((fr(SHOT[10][1] - 10) - fr(B["simmer"])) / 0.09)):
     put(clink(rng(103 + i), f0=2400, dur=0.05, bright=0.6), fr(B["simmer"]) + i * 0.09, 0.12, 103, 0.3)
 cue("clock ticks", fr(B["simmer"]))
 popsnd(fr(B["fish"] - 2), 380, 0.4, 104, "fish pop")
-clay(fr(B["putBowl"] + 1), 0.6, 105)
-popsnd(fr(B["price"] - 2), 640, 0.4, 106, "price sign")
 # shot 11: balloon squeak, footsteps away, the crack + low hit, closing swell
 tb = tt(0.35); y = np.sin(phase(900 + 300 * np.sin(TAU * 7 * tb))) * np.sin(np.pi * tb / 0.35) ** 2
 put(y, fr(B["yesterday"] - 2), 0.12, 110, 0.4, "balloon squeak")

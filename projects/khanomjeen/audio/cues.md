@@ -2,51 +2,39 @@
 
 -   0.000 s  f    0  market ambience 
 -   0.200 s  f    6  motif vibes 
--   2.700 s  f   81  phone pop 
--   2.767 s  f   83  phone ding 
--   5.333 s  f  160  coins 1
--   6.733 s  f  202  coins 4
--   7.910 s  f  237  whoosh into flash 
--  10.367 s  f  311  sign shimmer 
--  11.833 s  f  355  bowl down 
--  13.767 s  f  413  scanner hum 
--  14.000 s  f  420  motif vibes 
--  19.500 s  f  585  tag $90 
--  19.700 s  f  591  brain swell up 
--  21.967 s  f  659  tasty chime 
--  23.667 s  f  710  tag $10 
--  23.733 s  f  712  brain swell down 
--  27.367 s  f  821  brain on 
--  28.533 s  f  856  must be tasty 
--  29.400 s  f  882  pencils 
--  29.667 s  f  890  motif vibes 
--  32.167 s  f  965  discount tag 
--  32.933 s  f  988  dazed wobble 
--  33.767 s  f 1013  bulb ding 
--  36.867 s  f 1106  sign shimmer 
--  37.733 s  f 1132  hourglass sand 
--  37.833 s  f 1135  motif vibes 
--  40.667 s  f 1220  wrapper crinkle 
--  41.067 s  f 1232  better chime 
--  43.000 s  f 1290  longer chime 
--  43.133 s  f 1294  footsteps join 
--  50.600 s  f 1518  spoon 
--  51.167 s  f 1535  mouth sparkle 
--  52.267 s  f 1568  head on 
--  53.500 s  f 1605  motif pluck 
--  54.067 s  f 1622  phone pop 
--  55.347 s  f 1660  sign up 
--  57.833 s  f 1735  motif pluck 
--  58.200 s  f 1746  pot simmer 
--  58.333 s  f 1750  clock ticks 
--  59.067 s  f 1772  fish pop 
--  61.467 s  f 1844  bowl down 
--  61.667 s  f 1850  motif pluck 
--  63.133 s  f 1894  price sign 
--  67.133 s  f 2014  balloon squeak 
--  68.533 s  f 2056  customers leave 
--  69.533 s  f 2086  reverse swell 
--  71.233 s  f 2137  low hit 
--  71.233 s  f 2137  sign crack 
--  71.267 s  f 2138  motif vibes 
--  72.533 s  f 2176  cymbal 
+-   3.233 s  f   97  phone pop 
+-   3.300 s  f   99  phone ding 
+-   4.700 s  f  141  coins 1
+-   6.700 s  f  201  coins 4
+-   8.510 s  f  255  whoosh into flash 
+-  11.833 s  f  355  sign shimmer 
+-  14.200 s  f  426  bowl down 
+-  16.100 s  f  483  scanner hum 
+-  16.333 s  f  490  motif vibes 
+-  19.600 s  f  588  tag $10 
+-  22.667 s  f  680  tag $90 
+-  22.733 s  f  682  brain swell up 
+-  24.033 s  f  721  tasty chime 
+-  26.300 s  f  789  brain on 
+-  28.000 s  f  840  must be tasty 
+-  29.000 s  f  870  motif vibes 
+-  29.333 s  f  880  sign shimmer 
+-  32.033 s  f  961  hourglass sand 
+-  33.133 s  f  994  wrapper crinkle 
+-  33.533 s  f 1006  better chime 
+-  33.900 s  f 1017  footsteps join 
+-  33.967 s  f 1019  longer chime 
+-  38.667 s  f 1160  motif pluck 
+-  40.200 s  f 1206  phone pop 
+-  41.380 s  f 1241  sign up 
+-  43.000 s  f 1290  motif pluck 
+-  44.067 s  f 1322  pot simmer 
+-  44.200 s  f 1326  clock ticks 
+-  46.367 s  f 1391  fish pop 
+-  50.433 s  f 1513  balloon squeak 
+-  51.133 s  f 1534  customers leave 
+-  52.600 s  f 1578  reverse swell 
+-  54.333 s  f 1630  low hit 
+-  54.333 s  f 1630  motif vibes 
+-  54.333 s  f 1630  sign crack 
+-  55.600 s  f 1668  cymbal 
