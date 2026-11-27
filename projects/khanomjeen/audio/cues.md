@@ -1,0 +1,40 @@
+# Sound cues (time s / frame / cue)
+
+-   0.000 s  f    0  market ambience 
+-   0.200 s  f    6  motif vibes 
+-   3.233 s  f   97  phone pop 
+-   3.300 s  f   99  phone ding 
+-   4.700 s  f  141  coins 1
+-   6.700 s  f  201  coins 4
+-   8.510 s  f  255  whoosh into flash 
+-  11.833 s  f  355  sign shimmer 
+-  14.200 s  f  426  bowl down 
+-  16.100 s  f  483  scanner hum 
+-  16.333 s  f  490  motif vibes 
+-  19.600 s  f  588  tag $10 
+-  22.667 s  f  680  tag $90 
+-  22.733 s  f  682  brain swell up 
+-  24.033 s  f  721  tasty chime 
+-  26.300 s  f  789  brain on 
+-  28.000 s  f  840  must be tasty 
+-  29.000 s  f  870  motif vibes 
+-  29.333 s  f  880  sign shimmer 
+-  32.033 s  f  961  hourglass sand 
+-  33.133 s  f  994  wrapper crinkle 
+-  33.533 s  f 1006  better chime 
+-  33.900 s  f 1017  footsteps join 
+-  33.967 s  f 1019  longer chime 
+-  38.667 s  f 1160  motif pluck 
+-  40.200 s  f 1206  phone pop 
+-  41.380 s  f 1241  sign up 
+-  43.000 s  f 1290  motif pluck 
+-  44.067 s  f 1322  pot simmer 
+-  44.200 s  f 1326  clock ticks 
+-  46.367 s  f 1391  fish pop 
+-  50.433 s  f 1513  balloon squeak 
+-  51.133 s  f 1534  customers leave 
+-  52.600 s  f 1578  reverse swell 
+-  54.333 s  f 1630  low hit 
+-  54.333 s  f 1630  motif vibes 
+-  54.333 s  f 1630  sign crack 
+-  55.600 s  f 1668  cymbal 

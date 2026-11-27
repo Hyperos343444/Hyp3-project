@@ -1,0 +1,89 @@
+# Sound cues (time s / frame / cue)
+
+-   0.350 s  f   10  musicbox 74
+-   0.710 s  f   21  musicbox 77
+-   1.070 s  f   32  musicbox 81
+-   1.430 s  f   43  musicbox 80
+-   1.790 s  f   54  musicbox 76
+-   2.420 s  f   73  musicbox 74
+-   3.550 s  f  106  musicbox 74
+-   3.910 s  f  117  musicbox 77
+-   4.270 s  f  128  musicbox 81
+-   4.630 s  f  139  musicbox 80
+-   4.990 s  f  150  musicbox 76
+-   5.620 s  f  169  musicbox 74
+-   6.900 s  f  207  musicbox 74
+-   7.067 s  f  212  whoosh 
+-   7.260 s  f  218  musicbox 77
+-   7.620 s  f  229  musicbox 81
+-   7.980 s  f  239  musicbox 80
+-   8.236 s  f  247  coin 
+-   8.298 s  f  249  coin 
+-   8.340 s  f  250  musicbox 76
+-   8.344 s  f  250  coin 
+-   8.399 s  f  252  coin 
+-   8.456 s  f  254  coin 
+-   8.970 s  f  269  musicbox 74
+-  10.300 s  f  309  musicbox 74
+-  10.660 s  f  320  musicbox 77
+-  11.020 s  f  331  musicbox 81
+-  11.380 s  f  341  musicbox 80
+-  11.740 s  f  352  musicbox 76
+-  12.370 s  f  371  musicbox 74
+-  13.500 s  f  405  musicbox 74
+-  13.860 s  f  416  musicbox 77
+-  14.220 s  f  427  musicbox 81
+-  14.580 s  f  437  musicbox 80
+-  14.940 s  f  448  musicbox 76
+-  15.333 s  f  460  bottle 
+-  15.570 s  f  467  musicbox 74
+-  16.233 s  f  487  heartbeat 66 bpm
+-  17.142 s  f  514  heartbeat 83 bpm
+-  17.800 s  f  534  whoosh 
+-  17.867 s  f  536  chop thud 
+-  19.133 s  f  574  heartbeat 70 bpm
+-  19.990 s  f  600  heartbeat 85 bpm
+-  20.700 s  f  621  heartbeat 97 bpm
+-  21.133 s  f  634  whoosh 
+-  21.200 s  f  636  chop thud 
+-  23.133 s  f  694  iron clank 
+-  24.767 s  f  743  whoosh 
+-  27.167 s  f  815  fire 
+-  28.400 s  f  852  whoosh 
+-  28.467 s  f  854  fire flare 
+-  33.500 s  f 1005  gavel 
+-  33.833 s  f 1015  gavel 
+-  34.300 s  f 1029  whispers 
+-  36.167 s  f 1085  hmph 
+-  36.433 s  f 1093  hmph 
+-  36.700 s  f 1101  hmph 
+-  36.967 s  f 1109  hmph 
+-  37.233 s  f 1117  hmph 
+-  37.500 s  f 1125  hmph 
+-  38.333 s  f 1150  kids singing 
+-  41.567 s  f 1247  wind 
+-  41.967 s  f 1259  musicbox 74
+-  42.327 s  f 1270  musicbox 77
+-  42.687 s  f 1281  musicbox 81
+-  43.047 s  f 1291  musicbox 80
+-  43.407 s  f 1302  musicbox 76
+-  44.037 s  f 1321  musicbox 74
+-  45.033 s  f 1351  heartbeat 60 bpm
+-  45.267 s  f 1358  musicbox 74
+-  45.627 s  f 1369  musicbox 77
+-  45.987 s  f 1380  musicbox 81
+-  46.033 s  f 1381  heartbeat 65 bpm
+-  46.347 s  f 1390  musicbox 80
+-  46.707 s  f 1401  musicbox 76
+-  46.953 s  f 1409  heartbeat 70 bpm
+-  47.337 s  f 1420  musicbox 74
+-  47.600 s  f 1428  musicbox 74
+-  47.809 s  f 1434  heartbeat 75 bpm
+-  48.225 s  f 1447  musicbox 77
+-  48.613 s  f 1458  heartbeat 79 bpm
+-  48.850 s  f 1466  musicbox 81
+-  49.375 s  f 1481  heartbeat 83 bpm
+-  49.475 s  f 1484  musicbox 80
+-  49.733 s  f 1492  cymbal 
+-  50.100 s  f 1503  musicbox 76
+-  51.194 s  f 1536  musicbox 74
